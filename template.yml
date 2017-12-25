@@ -6,13 +6,13 @@ Transform:
 Parameters:
   ProjectId:
     Type: String
-    Description: AWS CodeStar projectID used to associate new resources to team members
+    Description: Reddit Subtopic Cache
 
 Resources:
   GetHelloWorld:
     Type: AWS::Serverless::Function
     Properties:
-      Handler: com.aws.codestar.projecttemplates.handler.HelloWorldHandler
+      Handler: org.yajac.reddit.cache.handler.RedditCacheHandler
       Runtime: java8
       Role:
         Fn::ImportValue:
@@ -24,17 +24,17 @@ Resources:
             Path: /
             Method: get
 
-  PostHelloWorld:
-    Type: AWS::Serverless::Function
-    Properties:
-      Handler: com.aws.codestar.projecttemplates.handler.HelloWorldHandler
-      Runtime: java8
-      Role:
-        Fn::ImportValue:
-          !Join ['-', [!Ref 'ProjectId', !Ref 'AWS::Region', 'LambdaTrustRole']]
-      Events:
-        PostEvent:
-          Type: Api
-          Properties:
-            Path: /
-            Method: post
+#  PostHelloWorld:
+#    Type: AWS::Serverless::Function
+#    Properties:
+#      Handler: org.yajac.reddit.cache.handler.RedditCacheHandlerr
+#      Runtime: java8
+#      Role:
+#        Fn::ImportValue:
+#          !Join ['-', [!Ref 'ProjectId', !Ref 'AWS::Region', 'LambdaTrustRole']]
+#      Events:
+#        PostEvent:
+#          Type: Api
+#          Properties:
+#            Path: /
+#            Method: post
