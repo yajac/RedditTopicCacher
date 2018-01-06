@@ -1,4 +1,4 @@
-package com.aws.codestar.projecttemplates;
+package org.yajac.reddit.lambda;
 
 import java.util.Collections;
 import java.util.HashMap;

@@ -1,8 +1,7 @@
-package org.yajac.reddit.cache.handler;
+package org.yajac.reddit.lambda;
 
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
-import com.aws.codestar.projecttemplates.GatewayResponse;
 
 import java.util.HashMap;
 import java.util.Map;
