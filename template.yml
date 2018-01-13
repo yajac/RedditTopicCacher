@@ -12,7 +12,7 @@ Resources:
   GetSubtopic:
     Type: AWS::Serverless::Function
     Properties:
-      Handler: org.yajac.reddit.cache.handler.RedditCacheHandler
+      Handler: org.yajac.reddit.lambda.RedditCacheReadHandler
       Runtime: java8
       Role:
         Fn::ImportValue:
