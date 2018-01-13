@@ -24,7 +24,6 @@ public class SubtopicListing {
     private ObjectMapper mapper = new ObjectMapper();
 
 
-
     public List<String> getListingForSubTopic(final String subtopic){
         RestTemplate restTemplate = new RestTemplate();
 

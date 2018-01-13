@@ -9,10 +9,10 @@ Parameters:
     Description: Reddit Subtopic Cache
 
 Resources:
-  GetHelloWorld:
+  GetRedditCache:
     Type: AWS::Serverless::Function
     Properties:
-      Handler: org.yajac.reddit.lambda.RedditCacheHandler
+      Handler: org.yajac.reddit.lambda.RedditCacheReadHandler
       Runtime: java8
       Role:
         Fn::ImportValue:
@@ -23,6 +23,14 @@ Resources:
           Properties:
             Path: /
             Method: get
+  SetRedditCache:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: org.yajac.reddit.lambda.RedditCacheWriteHandler
+      Runtime: java8
+      Role:
+        Fn::ImportValue:
+          !Join ['-', [!Ref 'ProjectId', !Ref 'AWS::Region', 'LambdaTrustRole']]
 
 #  PostHelloWorld:
 #    Type: AWS::Serverless::Function
