@@ -11,14 +11,13 @@ import java.util.Map;
 /**
  * Handler for requests to Lambda function.
  */
-public class RedditCacheReadHandler implements RequestHandler<CacheReadRequest, CacheResponse> {
+public class RedditCacheReadHandler implements RequestHandler<CacheRequest, CacheResponse> {
 
-    public CacheResponse handleRequest(final CacheReadRequest input, final Context context) {
+    public CacheResponse handleRequest(final CacheRequest input, final Context context) {
         Map<String, String> headers = new HashMap<>();
         headers.put("Content-Type", "application/json");
         final String subtopic = input.getSubtopic();
-        final String redisServer = null;
-        List<String> values =  CacheManager.getCacheValues(redisServer, subtopic);
+        List<String> values =  CacheManager.getCacheValues(subtopic);
         return new CacheResponse(values, headers, 200);
     }
 }

@@ -13,7 +13,7 @@ public class SubtopicListingTest {
         Map<String, String> listings = listing.getListingForSubTopic("new.json");
         System.out.println(listings);
         Assert.assertNotNull(listings);
-        Assert.assertTrue(listings.size() == 100);
+        Assert.assertTrue(listings.size() == 10);
     }
 
 }

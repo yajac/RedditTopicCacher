@@ -17,8 +17,8 @@ import static org.springframework.http.HttpMethod.GET;
 
 public class SubtopicListing {
 
-    private static String USER_AGENT = "AWSAPILoad:org.yajac.topic.org.yajac.cache.cache:v0.0.1";
-    private static String URL_BASE = "https://www.reddit.com/r/subreddit/{subtopic}?limit=100";
+    private static String USER_AGENT = "AWSAPILoad:org.yajac.topic.org.yajac.cache.reddit:v0.0.1";
+    private static String URL_BASE = "https://www.reddit.com/r/subreddit/{subtopic}?limit=10";
     private ObjectMapper mapper = new ObjectMapper();
 
 
