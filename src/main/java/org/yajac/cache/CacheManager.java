@@ -6,7 +6,7 @@ import java.util.List;
 
 public class CacheManager {
 
-	private static final String redisServer = System.getenv("redis.server");
+	private static final String redisServer = System.getenv("redis");
 
 	public static List<String> getCacheValues(final String hash) {
 		final Jedis jedis = new Jedis(redisServer);
