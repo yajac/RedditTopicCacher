@@ -5,7 +5,11 @@ package org.yajac.reddit.lambda;
  */
 public class CacheRequest {
 
-    private final String subtopic;
+    private String subtopic;
+
+    public CacheRequest(){
+
+    }
 
     public CacheRequest(final String subtopic) {
         this.subtopic = subtopic;
