@@ -11,11 +11,18 @@ public class CacheRequest {
 
     }
 
-    public CacheRequest(final String subtopic) {
+    public void setSubtopic(String subtopic) {
         this.subtopic = subtopic;
     }
 
     public String getSubtopic() {
         return subtopic;
+    }
+
+    @Override
+    public String toString() {
+        return "{" +
+                "subtopic='" + subtopic + '\'' +
+                '}';
     }
 }
