@@ -8,16 +8,18 @@ public class CacheManager {
 
 	private static final String redisServer = System.getenv("redis");
 
+	private static final String prefix = System.getenv("reddit-");
+
 	public static List<String> getCacheValues(final String hash) {
 		final Jedis jedis = new Jedis(redisServer);
-		final List<String> value = jedis.hvals(hash);
+		final List<String> value = jedis.hvals(prefix + hash);
 		jedis.close();
 		return value;
 	}
 
 	public static void setCacheValues(final String hash, final String key, final String value) {
 		final Jedis jedis = new Jedis(redisServer);
-		jedis.hsetnx(hash, key, value);
+		jedis.hsetnx(prefix + hash, key, value);
 		jedis.close();
 	}
 
