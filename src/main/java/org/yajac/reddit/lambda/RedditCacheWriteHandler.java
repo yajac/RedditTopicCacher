@@ -16,6 +16,7 @@ public class RedditCacheWriteHandler implements RequestHandler<CacheRequest, Gat
     public GatewayResponse handleRequest(final CacheRequest input, final Context context) {
         final Map<String, String> headers = new HashMap<>();
         headers.put("Content-Type", "application/json");
+        context.getLogger().log("Subtopic: " + input);
         final SubtopicListing client = new SubtopicListing();
         final String subtopic = input.getSubtopic();
         setCache(client, subtopic);
