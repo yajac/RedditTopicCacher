@@ -21,7 +21,7 @@ Resources:
         GetEvent:
           Type: Api
           Properties:
-            Path: /
+            Path: /{subtopic}
             Method: get
 
   CacheSubTopic:
@@ -32,9 +32,9 @@ Resources:
       Role:
         Fn::ImportValue:
           !Join ['-', [!Ref 'ProjectId', !Ref 'AWS::Region', 'LambdaTrustRole']]
-#      Events:
-#        PostEvent:
-#          Type: Api
-#          Properties:
-#            Path: /
-#            Method: post
+      Events:
+        PostEvent:
+          Type: Api
+          Properties:
+            Path: /{subtopic}
+            Method: post
