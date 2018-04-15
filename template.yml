@@ -23,7 +23,6 @@ Resources:
           Properties:
             Path: /{subtopic}
             Method: get
-
   CacheSubTopic:
     Type: AWS::Serverless::Function
     Properties:
@@ -33,8 +32,9 @@ Resources:
         Fn::ImportValue:
           !Join ['-', [!Ref 'ProjectId', !Ref 'AWS::Region', 'LambdaTrustRole']]
       Events:
-        PostEvent:
+        PutEvent:
           Type: Api
           Properties:
             Path: /{subtopic}
-            Method: post
+            Method: put
+

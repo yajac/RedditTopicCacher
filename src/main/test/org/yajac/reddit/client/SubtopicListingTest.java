@@ -10,7 +10,7 @@ public class SubtopicListingTest {
     @Test
     public void getListingForSubTopic() throws Exception {
         SubtopicListing listing = new SubtopicListing();
-        Map<String, String> listings = listing.getListingForSubTopic("new.json");
+        Map<String, String> listings = listing.getListingForSubTopic("test.json");
         System.out.println(listings);
         Assert.assertNotNull(listings);
         Assert.assertTrue(listings.size() == 10);

@@ -14,6 +14,7 @@ import java.util.Map;
 public class RedditCacheReadHandler implements RequestHandler<CacheRequest, CacheResponse> {
 
     public CacheResponse handleRequest(final CacheRequest input, final Context context) {
+
         context.getLogger().log("Subtopic: " + input);
         Map<String, String> headers = new HashMap<>();
         headers.put("Content-Type", "application/json");
