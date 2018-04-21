@@ -38,3 +38,17 @@ Resources:
             Path: /{subtopic}
             Method: put
 
+  CacheResponse:
+    Type: "AWS::ApiGateway::Model"
+    Properties:
+      RestApiId:
+            Ref: "PutEvent"
+      ContentType: "application/json"
+      Description: "Schema for CacheResponse"
+      Name: CacheResponse
+      Schema:
+        "$schema": "http://json-schema.org/draft-04/schema#"
+        title: CacheResponse
+        type: object
+        items:
+          type: string
