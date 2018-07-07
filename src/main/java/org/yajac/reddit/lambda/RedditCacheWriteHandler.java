@@ -1,8 +1,10 @@
 package org.yajac.reddit.lambda;
 
+import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
+import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClientBuilder;
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
-import org.yajac.cache.CacheManager;
+import org.yajac.persist.PersistCacheManager;
 import org.yajac.reddit.client.SubtopicListing;
 
 import java.util.HashMap;
@@ -12,6 +14,8 @@ import java.util.Map;
  * Handler for requests to Lambda function.
  */
 public class RedditCacheWriteHandler implements RequestHandler<CacheRequest, GatewayResponse> {
+
+    static final String table = "redditEvents";
 
     public GatewayResponse handleRequest(final CacheRequest input, final Context context) {
         final Map<String, String> headers = new HashMap<>();
@@ -26,9 +30,11 @@ public class RedditCacheWriteHandler implements RequestHandler<CacheRequest, Gat
     }
 
     private void setCache(SubtopicListing client, String subtopic) {
+        AmazonDynamoDB amazonDynamoDB = AmazonDynamoDBClientBuilder.standard().build();
+        PersistCacheManager persistCacheManager = new PersistCacheManager(amazonDynamoDB);
         Map<String, String> subtopics = client.getListingForSubTopic(subtopic + ".json");
-        for(String key : subtopics.keySet()){
-            CacheManager.setCacheValues(subtopic, key, subtopics.get(key));
+        for(String value : subtopics.values()){
+            persistCacheManager.putEvent(table, value);
         }
     }
 }
