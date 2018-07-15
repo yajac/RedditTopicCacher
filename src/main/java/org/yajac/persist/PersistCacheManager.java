@@ -12,6 +12,10 @@ import java.util.Map;
 
 public class PersistCacheManager {
 
+	public static final String INSERT_UTC = "insert_utc";
+
+	public static long TTL_TIME = 60 * 60 * 48;
+
 	private AmazonDynamoDB amazonDynamoDB;
 
 	public PersistCacheManager(AmazonDynamoDB amazonDynamoDB){
@@ -37,6 +41,7 @@ public class PersistCacheManager {
 
 	public void putEvent(final String tableName, final String eventJson){
 		Item eventItem = Item.fromJSON(eventJson);
+		eventItem.withLong(INSERT_UTC, (System.currentTimeMillis() / 1000 + TTL_TIME));
 		Map<String, Object> map = new HashMap<>(eventItem.asMap());
 		for(String key : map.keySet()){
 			Object value = map.get(key);

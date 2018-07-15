@@ -10,7 +10,7 @@ public class RedditCacheWriteHandlerTest extends BaseTestClass {
     public void handleRequest() throws Exception {
         RedditCacheWriteHandler handler = new RedditCacheWriteHandler();
         CacheRequest request = new CacheRequest();
-        request.setSubtopic("test");
+        request.setSubtopic("dogpictures");
         Object response = handler.handleRequest(request, getContext());
         Assert.assertNotNull(response);
     }

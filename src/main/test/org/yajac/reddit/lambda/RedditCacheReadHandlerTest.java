@@ -12,7 +12,7 @@ public class RedditCacheReadHandlerTest extends BaseTestClass {
     public void handleRequest() throws Exception {
         RedditCacheReadHandler handler = new RedditCacheReadHandler();
         CacheRequest request = new CacheRequest();
-        request.setSubtopic("test");
+        request.setSubtopic("dogpictures");
         CacheResponse response = handler.handleRequest(request, getContext());
         Assert.assertNotNull(response);
         Collection<String> bodies = response.getBody();

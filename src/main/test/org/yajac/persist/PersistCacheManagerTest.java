@@ -9,8 +9,12 @@ import org.junit.Before;
 import org.junit.Test;
 import org.yajac.reddit.BaseTestClass;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+
+import static org.yajac.persist.PersistCacheManager.INSERT_UTC;
+import static org.yajac.persist.PersistCacheManager.TTL_TIME;
 
 public class PersistCacheManagerTest extends BaseTestClass {
 
@@ -48,6 +52,7 @@ public class PersistCacheManagerTest extends BaseTestClass {
         for(String field : FIELDNAMES) {
             Assert.assertEquals(eventItem.get(field), eventItemReturn.get(field));
         }
+        Assert.assertTrue(((BigDecimal)eventItemReturn.get(INSERT_UTC)).longValue()<= System.currentTimeMillis() / 1000 + TTL_TIME);
     }
 
 
