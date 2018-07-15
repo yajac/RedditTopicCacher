@@ -26,9 +26,13 @@ public class RedditCacheReadHandler implements RequestHandler<CacheRequest, Cach
         return new CacheResponse(values, headers, 200);
     }
 
-    private List<String> getCacheValues(String subtopic) {
-        AmazonDynamoDB amazonDynamoDB = AmazonDynamoDBClientBuilder.standard().build();
+    protected List<String> getCacheValues(String subtopic) {
+        AmazonDynamoDB amazonDynamoDB = getAmazonDynamoDB();
         PersistCacheManager persistCacheManager = new PersistCacheManager(amazonDynamoDB);
         return persistCacheManager.getEvents(table, subtopic);
+    }
+
+    protected AmazonDynamoDB getAmazonDynamoDB() {
+        return AmazonDynamoDBClientBuilder.standard().build();
     }
 }

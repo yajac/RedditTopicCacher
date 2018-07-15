@@ -15,7 +15,7 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <aws.dynamodblocal.version>[1.11.86,2.0)</aws.dynamodblocal.version>
-        <aws.java.sdk.version>[1.11.89, 2.0.0)</aws.java.sdk.version>
+        <aws.java.sdk.version>1.11.368</aws.java.sdk.version>
         <sqlite4java.version>1.0.392</sqlite4java.version>
     </properties>
 
