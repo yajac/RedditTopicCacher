@@ -30,11 +30,15 @@ public class RedditCacheWriteHandler implements RequestHandler<CacheRequest, Gat
     }
 
     private void setCache(SubtopicListing client, String subtopic) {
-        AmazonDynamoDB amazonDynamoDB = AmazonDynamoDBClientBuilder.standard().build();
+        AmazonDynamoDB amazonDynamoDB = getAmazonDynamoDB();
         PersistCacheManager persistCacheManager = new PersistCacheManager(amazonDynamoDB);
         Map<String, String> subtopics = client.getListingForSubTopic(subtopic + ".json");
         for(String value : subtopics.values()){
             persistCacheManager.putEvent(table, value);
         }
+    }
+
+    protected AmazonDynamoDB getAmazonDynamoDB() {
+        return AmazonDynamoDBClientBuilder.standard().build();
     }
 }
