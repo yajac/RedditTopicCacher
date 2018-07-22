@@ -8,6 +8,7 @@ import com.amazonaws.services.lambda.runtime.LambdaLogger;
 import org.junit.Before;
 import org.junit.runner.RunWith;
 import org.mockito.runners.MockitoJUnitRunner;
+import org.yajac.persist.PersistCacheManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,13 +19,15 @@ import static org.mockito.Mockito.when;
 @RunWith(MockitoJUnitRunner.class)
 public abstract class BaseTestClass {
 
-    protected static AmazonDynamoDB dynamoDB;
+    protected AmazonDynamoDB dynamoDB;
+    protected PersistCacheManager persistCacheManager;
     public static final String REDDIT_EVENTS = "redditEvents";
 
     @Before
     public void setupDatabase(){
         dynamoDB = DynamoDBEmbedded.create().amazonDynamoDB();
         createTable(dynamoDB, REDDIT_EVENTS, "subreddit");
+        persistCacheManager = new PersistCacheManager(dynamoDB);
     }
 
     protected static CreateTableResult createTable(AmazonDynamoDB ddb, String tableName, String hashKeyName) {
