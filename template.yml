@@ -38,6 +38,7 @@ Resources:
             Path: /{subtopic}
             Method: put
 
+
   CacheResponse:
     Type: "AWS::ApiGateway::Model"
     Properties:
