@@ -51,4 +51,4 @@ Resources:
         title: CacheResponse
         type: object
         items:
-          type: string
+          type: object
