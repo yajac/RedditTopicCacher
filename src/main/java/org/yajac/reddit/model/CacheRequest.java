@@ -1,4 +1,4 @@
-package org.yajac.reddit.lambda;
+package org.yajac.reddit.model;
 
 /**
  * POJO containing request object for API Gateway.

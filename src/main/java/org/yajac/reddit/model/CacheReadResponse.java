@@ -1,25 +1,23 @@
-package org.yajac.reddit.lambda;
+package org.yajac.reddit.model;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
  * POJO containing response object for API Gateway.
  */
-public class GatewayResponse {
+public class CacheReadResponse {
 
-    private final String body;
+    private final Collection<String> body;
     private final Map<String, String> headers;
     private final int statusCode;
 
-    public GatewayResponse(final String body, final Map<String, String> headers, final int statusCode) {
+    public CacheReadResponse(final Collection<String> body, final Map<String, String> headers, final int statusCode) {
         this.statusCode = statusCode;
         this.body = body;
         this.headers = Collections.unmodifiableMap(new HashMap<>(headers));
     }
 
-    public String getBody() {
+    public Collection<String> getBody() {
         return body;
     }
 

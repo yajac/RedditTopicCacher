@@ -37,19 +37,31 @@ Resources:
           Properties:
             Path: /{subtopic}
             Method: put
-
-
-  CacheResponse:
+  CacheReadResponse:
     Type: "AWS::ApiGateway::Model"
     Properties:
       RestApiId:
-            Ref: "PutEvent"
+            Ref: "GetEvent"
       ContentType: "application/json"
-      Description: "Schema for CacheResponse"
-      Name: CacheResponse
+      Description: "Schema for CacheReadResponse"
+      Name: CacheReadResponse
       Schema:
         "$schema": "http://json-schema.org/draft-04/schema#"
-        title: CacheResponse
-        type: object
+        title: CacheReadResponse
+        type: array
         items:
           type: object
+    CacheWriteResponse:
+      Type: "AWS::ApiGateway::Model"
+      Properties:
+        RestApiId:
+              Ref: "PutEvent"
+        ContentType: "application/json"
+        Description: "Schema for CacheWriteResponse"
+        Name: CacheWriteResponse
+        Schema:
+          "$schema": "http://json-schema.org/draft-04/schema#"
+          title: CacheWriteResponse
+          type: object
+          items:
+            type: string

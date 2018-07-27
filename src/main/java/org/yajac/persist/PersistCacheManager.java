@@ -1,6 +1,7 @@
 package org.yajac.persist;
 
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
 import com.amazonaws.services.dynamodbv2.document.*;
 import com.amazonaws.services.dynamodbv2.document.spec.QuerySpec;
 import com.amazonaws.services.dynamodbv2.document.utils.ValueMap;
@@ -53,6 +54,21 @@ public class PersistCacheManager {
 		DynamoDB dynamoDB = new DynamoDB(amazonDynamoDB);
 		Table table = dynamoDB.getTable(tableName);
 		table.putItem(eventItem);
+	}
+
+	private void getMapper(){
+		DynamoDBMapper mapper = new DynamoDBMapper(amazonDynamoDB);
+		/**
+		 * DynamoDBQueryExpression<CatalogItem> queryExpression = new DynamoDBQueryExpression<CatalogItem>()
+		 .withHashKeyValues(partitionKey);
+
+		 List<CatalogItem> itemList = mapper.query(CatalogItem.class, queryExpression);
+
+		 for (int i = 0; i < itemList.size(); i++) {
+		 System.out.println(itemList.get(i).getTitle());
+		 System.out.println(itemList.get(i).getBookAuthors());
+		 }
+		 */
 	}
 
 }
