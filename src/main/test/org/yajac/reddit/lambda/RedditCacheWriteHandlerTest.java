@@ -6,6 +6,7 @@ import org.junit.Test;
 import org.mockito.Mockito;
 import org.mockito.Spy;
 import org.yajac.reddit.BaseTestClass;
+import org.yajac.reddit.model.CacheRequest;
 
 public class RedditCacheWriteHandlerTest extends BaseTestClass {
 

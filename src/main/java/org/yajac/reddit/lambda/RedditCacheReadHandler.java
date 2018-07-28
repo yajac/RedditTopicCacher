@@ -5,6 +5,8 @@ import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClientBuilder;
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
 import org.yajac.persist.PersistCacheManager;
+import org.yajac.reddit.model.CacheReadResponse;
+import org.yajac.reddit.model.CacheRequest;
 
 import java.util.HashMap;
 import java.util.List;
@@ -13,17 +15,17 @@ import java.util.Map;
 /**
  * Handler for requests to Lambda function.
  */
-public class RedditCacheReadHandler implements RequestHandler<CacheRequest, CacheResponse> {
+public class RedditCacheReadHandler implements RequestHandler<CacheRequest, CacheReadResponse> {
 
     static final String table = "redditEvents";
 
-    public CacheResponse handleRequest(final CacheRequest input, final Context context) {
+    public CacheReadResponse handleRequest(final CacheRequest input, final Context context) {
         context.getLogger().log("Subtopic: " + input);
         Map<String, String> headers = new HashMap<>();
         headers.put("Content-Type", "application/json");
         final String subtopic = input.getSubtopic();
         List<String> values =  getCacheValues(subtopic);
-        return new CacheResponse(values, headers, 200);
+        return new CacheReadResponse(values, headers, 200);
     }
 
     protected List<String> getCacheValues(String subtopic) {
