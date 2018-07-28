@@ -41,7 +41,7 @@ Resources:
     Type: "AWS::ApiGateway::Model"
     Properties:
       RestApiId:
-            Ref: "GetSubtopic"
+            Ref: GetSubtopic
       ContentType: "application/json"
       Description: "Schema for CacheReadResponse"
       Name: CacheReadResponse
@@ -55,7 +55,7 @@ Resources:
     Type: "AWS::ApiGateway::Model"
     Properties:
       RestApiId:
-            Ref: "CacheSubTopic"
+            Ref: CacheSubTopic
       ContentType: "application/json"
       Description: "Schema for CacheWriteResponse"
       Name: CacheWriteResponse
