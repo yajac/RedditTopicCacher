@@ -20,12 +20,17 @@ public class RedditCacheReadHandler implements RequestHandler<CacheRequest, Cach
     static final String table = "redditEvents";
 
     public CacheReadResponse handleRequest(final CacheRequest input, final Context context) {
-        context.getLogger().log("Subtopic: " + input);
+        context.getLogger().log("Input: " + input);
+        final String subtopic = input.getPathParameters().get("subtopic");
+        context.getLogger().log("Subtopic: " + subtopic);
+        List<String> values =  getCacheValues(subtopic);
+        return new CacheReadResponse(values, getReturnHeaders(), 200);
+    }
+
+    private Map<String, String> getReturnHeaders() {
         Map<String, String> headers = new HashMap<>();
         headers.put("Content-Type", "application/json");
-        final String subtopic = input.getPathParameters().get("subtopic");
-        List<String> values =  getCacheValues(subtopic);
-        return new CacheReadResponse(values, headers, 200);
+        return headers;
     }
 
     protected List<String> getCacheValues(String subtopic) {
