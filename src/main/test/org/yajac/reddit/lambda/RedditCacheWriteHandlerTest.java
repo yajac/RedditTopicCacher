@@ -21,7 +21,9 @@ public class RedditCacheWriteHandlerTest extends BaseTestClass {
     @Test
     public void handleRequest() throws Exception {
         CacheRequest request = new CacheRequest();
-        request.setSubtopic("dogpictures");
+        request.getPathParameters().put("subtopic", "dogpictures");
+
+
         Object response = handler.handleRequest(request, getContext());
         Assert.assertNotNull(response);
     }

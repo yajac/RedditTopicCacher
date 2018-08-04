@@ -14,6 +14,7 @@ Resources:
     Properties:
       Handler: org.yajac.reddit.lambda.RedditCacheReadHandler
       Runtime: java8
+      #CodeUri: ./target/RedditTopicCache-1.0.jar
       Role:
         Fn::ImportValue:
           !Join ['-', [!Ref 'ProjectId', !Ref 'AWS::Region', 'LambdaTrustRole']]
@@ -28,6 +29,7 @@ Resources:
     Properties:
       Handler: org.yajac.reddit.lambda.RedditCacheWriteHandler
       Runtime: java8
+      #CodeUri: ./target/RedditTopicCache-1.0.jar
       Role:
         Fn::ImportValue:
           !Join ['-', [!Ref 'ProjectId', !Ref 'AWS::Region', 'LambdaTrustRole']]
@@ -37,31 +39,3 @@ Resources:
           Properties:
             Path: /{subtopic}
             Method: put
-  CacheReadResponse:
-    Type: "AWS::ApiGateway::Model"
-    Properties:
-      RestApiId:
-            Ref: "GetSubtopic"
-      ContentType: "application/json"
-      Description: "Schema for CacheReadResponse"
-      Name: CacheReadResponse
-      Schema:
-        "$schema": "http://json-schema.org/draft-04/schema#"
-        title: CacheReadResponse
-        type: array
-        items:
-          type: object
-  CacheWriteResponse:
-    Type: "AWS::ApiGateway::Model"
-    Properties:
-      RestApiId:
-            Ref: "CacheSubTopic"
-      ContentType: "application/json"
-      Description: "Schema for CacheWriteResponse"
-      Name: CacheWriteResponse
-      Schema:
-        "$schema": "http://json-schema.org/draft-04/schema#"
-        title: CacheWriteResponse
-        type: object
-        items:
-          type: string
