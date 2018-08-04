@@ -23,7 +23,7 @@ public class RedditCacheReadHandler implements RequestHandler<CacheRequest, Cach
         context.getLogger().log("Subtopic: " + input);
         Map<String, String> headers = new HashMap<>();
         headers.put("Content-Type", "application/json");
-        final String subtopic = input.getSubtopic();
+        final String subtopic = input.getPathParameters().get("subtopic");
         List<String> values =  getCacheValues(subtopic);
         return new CacheReadResponse(values, headers, 200);
     }

@@ -26,7 +26,7 @@ public class RedditCacheWriteHandler implements RequestHandler<CacheRequest, Cac
             context.getLogger().log("Subtopic: " + input);
         }
         final SubtopicListing client = new SubtopicListing();
-        final String subtopic = input.getSubtopic();
+        final String subtopic = input.getPathParameters().get("subtopic");
         setCache(client, subtopic);
         return new CacheWriteResponse("{ \"Output\": \"Success\"}", headers, 200);
     }
