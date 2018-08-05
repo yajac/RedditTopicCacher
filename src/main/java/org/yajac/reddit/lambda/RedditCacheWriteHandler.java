@@ -7,7 +7,7 @@ import com.amazonaws.services.lambda.runtime.RequestHandler;
 import org.yajac.persist.PersistCacheManager;
 import org.yajac.reddit.client.SubtopicListing;
 import org.yajac.reddit.model.CacheRequest;
-import org.yajac.reddit.model.CacheWriteResponse;
+import org.yajac.reddit.model.GatewayResponse;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -15,11 +15,11 @@ import java.util.Map;
 /**
  * Handler for requests to Lambda function.
  */
-public class RedditCacheWriteHandler implements RequestHandler<CacheRequest, CacheWriteResponse> {
+public class RedditCacheWriteHandler implements RequestHandler<CacheRequest, GatewayResponse> {
 
     static final String table = "redditEvents";
 
-    public CacheWriteResponse handleRequest(final CacheRequest input, final Context context) {
+    public GatewayResponse handleRequest(final CacheRequest input, final Context context) {
         final Map<String, String> headers = new HashMap<>();
         headers.put("Content-Type", "application/json");
         if(context != null) {
@@ -28,7 +28,7 @@ public class RedditCacheWriteHandler implements RequestHandler<CacheRequest, Cac
         final SubtopicListing client = new SubtopicListing();
         final String subtopic = input.getPathParameters().get("subtopic");
         setCache(client, subtopic);
-        return new CacheWriteResponse("{ \"Output\": \"Success\"}", headers, 200);
+        return new GatewayResponse("{ \"Output\": \"Success\"}", 200);
     }
 
     private void setCache(SubtopicListing client, String subtopic) {

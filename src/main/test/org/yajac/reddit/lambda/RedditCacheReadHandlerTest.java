@@ -7,9 +7,7 @@ import org.mockito.Mockito;
 import org.mockito.Spy;
 import org.yajac.reddit.BaseTestClass;
 import org.yajac.reddit.model.CacheRequest;
-import org.yajac.reddit.model.CacheReadResponse;
-
-import java.util.Collection;
+import org.yajac.reddit.model.GatewayResponse;
 
 
 public class RedditCacheReadHandlerTest extends BaseTestClass {
@@ -30,11 +28,11 @@ public class RedditCacheReadHandlerTest extends BaseTestClass {
     public void handleRequest() throws Exception {
         CacheRequest request = new CacheRequest();
         request.getPathParameters().put("subtopic", "dogpictures");
-        CacheReadResponse response = handler.handleRequest(request, getContext());
+        GatewayResponse response = handler.handleRequest(request, getContext());
         Assert.assertNotNull(response);
-        Collection<String> bodies = response.getBody();
+        String bodies = response.getBody();
         Assert.assertNotNull(bodies);
-        Assert.assertTrue(bodies.size() == 1);
+        Assert.assertEquals(bodies.length(), 4455);
     }
 
 }
