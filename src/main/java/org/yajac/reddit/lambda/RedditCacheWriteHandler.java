@@ -9,7 +9,6 @@ import org.yajac.reddit.client.SubtopicListing;
 import org.yajac.reddit.model.CacheRequest;
 import org.yajac.reddit.model.GatewayResponse;
 
-import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -20,11 +19,7 @@ public class RedditCacheWriteHandler implements RequestHandler<CacheRequest, Gat
     static final String table = "redditEvents";
 
     public GatewayResponse handleRequest(final CacheRequest input, final Context context) {
-        final Map<String, String> headers = new HashMap<>();
-        headers.put("Content-Type", "application/json");
-        if(context != null) {
-            context.getLogger().log("Subtopic: " + input);
-        }
+        context.getLogger().log("Subtopic: " + input);
         final SubtopicListing client = new SubtopicListing();
         final String subtopic = input.getPathParameters().get("subtopic");
         setCache(client, subtopic);
