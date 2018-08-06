@@ -18,15 +18,23 @@ public class RedditCacheReadHandler implements RequestHandler<CacheRequest, Gate
     static final String table = "redditEvents";
 
     public GatewayResponse handleRequest(final CacheRequest input, final Context context) {
-        context.getLogger().log("Input: " + input);
+        //context.getLogger().log("Input: " + input);
         final String subtopic = input.getPathParameters().get("subtopic");
         context.getLogger().log("Subtopic: " + subtopic);
-        return new GatewayResponse(getBody(getCacheValues(subtopic)), 200);
+        try {
+            String body = getBody(subtopic);
+            context.getLogger().log("Body: " + body);
+            return new GatewayResponse(body, 200);
+        } catch (Exception e){
+            context.getLogger().log("Error: " + e);
+            return new GatewayResponse("{'Error':'Error'}", 500);
+        }
     }
 
-    private String getBody(List<String> values) {
+    private String getBody(final String subtopic) {
+        List<String> cacheValues = getCacheValues(subtopic);
         StringBuffer body = new StringBuffer("[");
-        body.append(String.join("},{", values));
+        body.append(String.join(",", cacheValues));
         body.append("]");
         return body.toString();
     }
