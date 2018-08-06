@@ -14,7 +14,8 @@ Resources:
     Properties:
       Handler: org.yajac.reddit.lambda.RedditCacheReadHandler
       Runtime: java8
-      CodeUri: ./target/RedditTopicCache-1.0.jar
+      #CodeUri: ./target/RedditTopicCache-1.0.jar
+      Timeout: 10
       Role:
         Fn::ImportValue:
           !Join ['-', [!Ref 'ProjectId', !Ref 'AWS::Region', 'LambdaTrustRole']]
@@ -29,7 +30,7 @@ Resources:
     Properties:
       Handler: org.yajac.reddit.lambda.RedditCacheWriteHandler
       Runtime: java8
-      CodeUri: ./target/RedditTopicCache-1.0.jar
+      #CodeUri: ./target/RedditTopicCache-1.0.jar
       Role:
         Fn::ImportValue:
           !Join ['-', [!Ref 'ProjectId', !Ref 'AWS::Region', 'LambdaTrustRole']]
