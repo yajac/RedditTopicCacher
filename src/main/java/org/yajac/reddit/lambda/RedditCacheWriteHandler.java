@@ -23,7 +23,7 @@ public class RedditCacheWriteHandler implements RequestHandler<CacheRequest, Gat
         final SubtopicListing client = new SubtopicListing();
         final String subtopic = input.getPathParameters().get("subtopic");
         setCache(client, subtopic);
-        return new GatewayResponse("{ \"Output\": \"Success\"}", 200);
+        return new GatewayResponse("{'Output': 'Success'}", 200);
     }
 
     private void setCache(SubtopicListing client, String subtopic) {

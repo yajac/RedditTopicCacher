@@ -27,7 +27,7 @@ public class RedditCacheReadHandler implements RequestHandler<CacheRequest, Gate
             return new GatewayResponse(body, 200);
         } catch (Exception e){
             context.getLogger().log("Error: " + e);
-            return new GatewayResponse("{'Error':'Error'}", 500);
+            return new GatewayResponse("{'Error':'" + e.getMessage() + "'}", 500);
         }
     }
 
