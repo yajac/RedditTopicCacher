@@ -15,7 +15,8 @@ Resources:
       Handler: org.yajac.reddit.lambda.RedditCacheReadHandler
       Runtime: java8
       #CodeUri: ./target/RedditTopicCache-1.0.jar
-      Timeout: 20
+      Timeout: 30
+      MemorySize: 512
       Role:
         Fn::ImportValue:
           !Join ['-', [!Ref 'ProjectId', !Ref 'AWS::Region', 'LambdaTrustRole']]
@@ -31,7 +32,8 @@ Resources:
       Handler: org.yajac.reddit.lambda.RedditCacheWriteHandler
       Runtime: java8
       #CodeUri: ./target/RedditTopicCache-1.0.jar
-      Timeout: 20
+      Timeout: 30
+      MemorySize: 512
       Role:
         Fn::ImportValue:
           !Join ['-', [!Ref 'ProjectId', !Ref 'AWS::Region', 'LambdaTrustRole']]
