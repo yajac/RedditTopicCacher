@@ -17,7 +17,9 @@ Resources:
       #CodeUri: ./target/RedditTopicCache-1.0.jar
       Timeout: 30
       MemorySize: 512
-      Role: arn:aws:iam::201422707816:role/service-role/Reddit-Topic-Lamdba
+      Role:
+        Fn::ImportValue:
+          !Join ['-', [!Ref 'ProjectId', !Ref 'AWS::Region', 'LambdaTrustRole']]
       Events:
         GetEvent:
           Type: Api
@@ -32,7 +34,9 @@ Resources:
       #CodeUri: ./target/RedditTopicCache-1.0.jar
       Timeout: 30
       MemorySize: 512
-      Role: arn:aws:iam::201422707816:role/service-role/Reddit-Topic-Lamdba
+      Role:
+        Fn::ImportValue:
+          !Join ['-', [!Ref 'ProjectId', !Ref 'AWS::Region', 'LambdaTrustRole']]
       Events:
         PutEvent:
           Type: Api
