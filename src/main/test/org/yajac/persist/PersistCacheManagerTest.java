@@ -6,6 +6,7 @@ import org.junit.Test;
 import org.yajac.reddit.BaseTestClass;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.yajac.persist.PersistCacheManager.INSERT_UTC;
@@ -22,7 +23,9 @@ public class PersistCacheManagerTest extends BaseTestClass {
 
     @Test
     public void persist() throws Exception {
-        persistCacheManager.putEvent(REDDIT_EVENTS, TEST);
+        List<String> items = new ArrayList<>();
+        items.add(TEST);
+        persistCacheManager.putEvents(REDDIT_EVENTS, items);
         List<String> events = persistCacheManager.getEvents(REDDIT_EVENTS, "dogpictures" );
         Assert.assertNotNull(events);
         Assert.assertTrue(events.size() == 1);
@@ -30,7 +33,9 @@ public class PersistCacheManagerTest extends BaseTestClass {
 
     @Test
     public void getItem() throws Exception {
-        persistCacheManager.putEvent(REDDIT_EVENTS, TEST2);
+        List<String> items = new ArrayList<>();
+        items.add(TEST2);
+        persistCacheManager.putEvents(REDDIT_EVENTS, items);
         Item eventItem = Item.fromJSON(TEST2);
         List<String> events = persistCacheManager.getEvents(REDDIT_EVENTS, "dogpictures2" );
         Assert.assertNotNull(events);

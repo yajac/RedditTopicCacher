@@ -23,16 +23,14 @@ public class RedditCacheWriteHandler implements RequestHandler<CacheRequest, Gat
         final SubtopicListing client = new SubtopicListing();
         final String subtopic = input.getPathParameters().get("subtopic");
         setCache(client, subtopic);
-        return new GatewayResponse("{ \"Output\": \"Success\"}", 200);
+        return new GatewayResponse("{'Output': 'Success'}", 200);
     }
 
     private void setCache(SubtopicListing client, String subtopic) {
         AmazonDynamoDB amazonDynamoDB = getAmazonDynamoDB();
         PersistCacheManager persistCacheManager = new PersistCacheManager(amazonDynamoDB);
         Map<String, String> subtopics = client.getListingForSubTopic(subtopic + ".json");
-        for(String value : subtopics.values()){
-            persistCacheManager.putEvent(table, value);
-        }
+        persistCacheManager.putEvents(table, subtopics.values());
     }
 
     protected AmazonDynamoDB getAmazonDynamoDB() {

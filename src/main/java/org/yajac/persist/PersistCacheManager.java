@@ -5,10 +5,7 @@ import com.amazonaws.services.dynamodbv2.document.*;
 import com.amazonaws.services.dynamodbv2.document.spec.QuerySpec;
 import com.amazonaws.services.dynamodbv2.document.utils.ValueMap;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class PersistCacheManager {
 
@@ -38,20 +35,22 @@ public class PersistCacheManager {
 		return events;
 	}
 
-	public void putEvent(final String tableName, final String eventJson){
-		Item eventItem = Item.fromJSON(eventJson);
-		eventItem.withLong(INSERT_UTC, (System.currentTimeMillis() / 1000 + TTL_TIME));
-		Map<String, Object> map = new HashMap<>(eventItem.asMap());
-		for(String key : map.keySet()){
-			Object value = map.get(key);
-			if(value instanceof String && ((String) value).isEmpty()){
-				eventItem.removeAttribute(key);
-			}
-		}
-		eventItem.withPrimaryKey("subreddit", eventItem.get("subreddit"));
+	public void putEvents(final String tableName, final Collection<String> events){
 		DynamoDB dynamoDB = new DynamoDB(amazonDynamoDB);
 		Table table = dynamoDB.getTable(tableName);
-		table.putItem(eventItem);
+		for(String eventJson : events) {
+			Item eventItem = Item.fromJSON(eventJson);
+			eventItem.withLong(INSERT_UTC, (System.currentTimeMillis() / 1000 + TTL_TIME));
+			Map<String, Object> map = new HashMap<>(eventItem.asMap());
+			for (String key : map.keySet()) {
+				Object value = map.get(key);
+				if (value instanceof String && ((String) value).isEmpty()) {
+					eventItem.removeAttribute(key);
+				}
+			}
+			eventItem.withPrimaryKey("subreddit", eventItem.get("subreddit"));
+			table.putItem(eventItem);
+		}
 	}
 
 }
