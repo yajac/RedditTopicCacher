@@ -9,6 +9,9 @@ import org.yajac.reddit.BaseTestClass;
 import org.yajac.reddit.model.CacheRequest;
 import org.yajac.reddit.model.GatewayResponse;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class RedditCacheReadHandlerTest extends BaseTestClass {
 
@@ -21,7 +24,9 @@ public class RedditCacheReadHandlerTest extends BaseTestClass {
     @Before
     public void setup(){
         Mockito.when(handler.getAmazonDynamoDB()).thenReturn(dynamoDB);
-        persistCacheManager.putEvent(REDDIT_EVENTS, TEST);
+        List<String> items = new ArrayList<>();
+        items.add(TEST);
+        persistCacheManager.putEvents(REDDIT_EVENTS, items);
     }
 
     @Test
