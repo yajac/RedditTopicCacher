@@ -44,7 +44,9 @@ public class PersistCacheManager {
 			Map<String, Object> map = new HashMap<>(eventItem.asMap());
 			for (String key : map.keySet()) {
 				Object value = map.get(key);
-				if (value instanceof String && ((String) value).isEmpty()) {
+				if(isRemovable(value)) {
+					eventItem.removeAttribute(key);
+				} else if(key.equals("crosspost_parent_list")){
 					eventItem.removeAttribute(key);
 				}
 			}
@@ -53,4 +55,7 @@ public class PersistCacheManager {
 		}
 	}
 
+	private boolean isRemovable(Object value){
+		return value == null || (value instanceof String && ((String) value).isEmpty()) || (value instanceof Map && ((Map) value).isEmpty()) || (value instanceof Collection && ((Collection) value).isEmpty());
+	}
 }
