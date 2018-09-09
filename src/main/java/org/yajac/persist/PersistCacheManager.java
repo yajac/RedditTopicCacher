@@ -11,7 +11,7 @@ public class PersistCacheManager {
 
 	public static final String INSERT_UTC = "insert_utc";
 
-	public static long TTL_TIME = 60 * 60 * 48;
+	public static long TTL_TIME = 60 * 60 * 24;
 
 	private AmazonDynamoDB amazonDynamoDB;
 
