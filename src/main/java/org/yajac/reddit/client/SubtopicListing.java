@@ -17,7 +17,7 @@ import static org.springframework.http.HttpMethod.GET;
 
 public class SubtopicListing {
 
-    private static String LIMIT = "?limit=50";
+    private static String LIMIT = "?limit=20";
     private static String USER_AGENT = "AWSAPILoad:org.yajac.topic.org.yajac.cache.reddit:v0.0.1";
     private static String URL_BASE = "https://www.reddit.com/r/{subtopic}" + LIMIT;
     private ObjectMapper mapper = new ObjectMapper();
